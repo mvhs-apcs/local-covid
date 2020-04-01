@@ -1,6 +1,6 @@
-# Douglas County Covid Cases
+# Local Covid Cases
 
-A website that pulls the latest data from [github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19) every 15 minutes to show the cases reported in Douglas County, CO.
+A website that pulls the latest data from [github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19) every 15 minutes to show the cases reported in locally (defaults to Douglas County, CO).
 
 ## Setup
 

@@ -17,7 +17,6 @@ let checkForUpdate = () => {
   checkedAt = moment(date);
   loadData(date)
     .then(info => {
-      //console.log(data);
       displayInfo(info);
     });
 }
@@ -60,9 +59,12 @@ let parseData = (text) => {
 }
 
 let displayInfo = (info) => {
+  let countyEl = document.getElementById('county');
   let infoEl = document.getElementById('info');
   let lastUpdatedEl = document.getElementById('last-updated');
   let lastCheckedEl = document.getElementById('last-check');
+
+  countyEl.innerText = info.county
 
   let table = document.createElement('table');
   table.innerHTML = `
