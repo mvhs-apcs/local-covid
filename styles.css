@@ -1,0 +1,21 @@
+body {
+    background: #999;
+}
+
+h1 {
+    color: purple;
+}
+
+#info {
+    margin-bottom: 20px;
+}
+
+#info table {
+    border: 1px solid #aaa;
+    padding: 10px;
+    text-align: center;
+}
+
+#info td, #info th {
+    padding: 10px 20px;
+}
