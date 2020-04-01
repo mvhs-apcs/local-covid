@@ -1,7 +1,9 @@
 const covid_data_url_base = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'
 const douglas_county_code = '08035';
 const checkInterval = 1000*60*15; // check every 15 minutes
+const timeUpdateInterval = 1000*10; // every 10 seconds
 let checkedAt;
+let lastUpdatedAt;
 
 
 let ready = function() {
@@ -10,6 +12,10 @@ let ready = function() {
   setInterval(() => {
     checkForUpdate();
   }, checkInterval);
+
+  setInterval(() => {
+    updateTimes();
+  }, timeUpdateInterval);
 }
 
 let checkForUpdate = () => {
@@ -61,10 +67,8 @@ let parseData = (text) => {
 let displayInfo = (info) => {
   let countyEl = document.getElementById('county');
   let infoEl = document.getElementById('info');
-  let lastUpdatedEl = document.getElementById('last-updated');
-  let lastCheckedEl = document.getElementById('last-check');
 
-  countyEl.innerText = info.county
+  countyEl.innerText = info.county;
 
   let table = document.createElement('table');
   table.innerHTML = `
@@ -81,7 +85,15 @@ let displayInfo = (info) => {
   infoEl.innerHTML = '';
   infoEl.append(table);
 
-  lastUpdatedEl.innerText = `Latest update: ${info.lastUpdated.fromNow()}`;
+  lastUpdatedAt = info.lastUpdated;
+  updateTimes();
+}
+
+let updateTimes = () => {
+  let lastUpdatedEl = document.getElementById('last-updated');
+  let lastCheckedEl = document.getElementById('last-check');
+
+  lastUpdatedEl.innerText = `Latest update: ${lastUpdatedAt.fromNow()}`;
   lastCheckedEl.innerText = `Last checked:  ${checkedAt.fromNow()}`;
 }
 
