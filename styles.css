@@ -1,9 +1,9 @@
 body {
-    background: #999;
+    background: rgb(48, 120, 255);
 }
 
 h1 {
-    color: purple;
+    color: rgb(228, 228, 228);
 }
 
 #info {
