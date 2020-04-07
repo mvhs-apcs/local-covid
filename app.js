@@ -5,6 +5,8 @@ const timeUpdateInterval = 1000*10; // every 10 seconds
 let checkedAt;
 let lastUpdatedAt;
 
+var county2_name = window.prompt("Enter your county name").toLowerCase();
+var state2_name = window.prompt("Enter your state name").toLowerCase();
 
 let ready = function() {
   checkForUpdate();
@@ -52,6 +54,10 @@ let parseData = (text) => {
                     .filter(line => line.startsWith(douglas_county_code))[0]
                     .split(',');
 
+  let localData2 = text.split('\n')
+                    .filter(line => line.toLowerCase().includes(county2_name) && line.toLowerCase().includes(state2_name))[0]
+                    .split(',');
+
   return {
     county: localData[1],
     state: localData[2],
@@ -60,25 +66,44 @@ let parseData = (text) => {
     confirmed: localData[7],
     deaths: localData[8],
     recovered: localData[9],
-    active: localData[10]
+    active: localData[10],
+
+    county2: localData2[1],
+    state2: localData2[2],
+    country2: localData2[3],
+    lastUpdated2: moment(localData2[4]),
+    confirmed2: localData2[7],
+    deaths2: localData2[8],
+    recovered2: localData2[9],
+    active2: localData2[10]
   }
 }
 
 let displayInfo = (info) => {
-  let countyEl = document.getElementById('county');
+  //let countyEl = document.getElementById('county');
   let infoEl = document.getElementById('info');
 
-  countyEl.innerText = info.county;
+  //countyEl.innerText = info.county;
 
   let table = document.createElement('table');
   table.innerHTML = `
     <tr>
       <th>Confirmed Cases</th>
       <th>Deaths</th>
+      <th>County</th>
+      <th>State</th>
     </tr>
     <tr>
       <td>${info.confirmed}</td>
       <td>${info.deaths}</td>
+      <td>${info.county}</td>
+      <td>${info.state}</td>
+    </tr>
+    <tr>
+      <td>${info.confirmed2}</td>
+      <td>${info.deaths2}</td>
+      <td>${info.county2}</td>
+      <td>${info.state2}</td>
     </tr>
   `;
 
